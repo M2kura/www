@@ -6,22 +6,22 @@
     <link rel="stylesheet" href="styles.css" />
     <title>la galerie</title>
 </head>
-<body class="index">
-    <div class="centered-links">
-        <div>
-            <h1 class="welcome">Welcome</h1>
+<body>
+        <div class="welcome">
+            <h1>Welcome</h1>
         </div>
-        <div>
-            <form class="log-in-form">
+        <div class="sign-in-form">
+            <form>
                 <fieldset>
-                    <legend class="legend">Log in</legend>
-                    <label for="mail">Email:</label>
-                    <input type="text" id="mail" name="mail">
-                    <label for="password">Password:</label>
-                    <input type="text" id="password" name="password">
+                    <legend class="legend"><input type="Submit" value="Sign In"></legend>
+                    <label for="login">Login: <input type="text" id="login" name="login" placeholder="Username or email" /></label>
+                    <label for="password">Password: <input type="text" id="password" name="password" /></label>
                 </fieldset>
+                <article class="links">
+                    <p class="sign-up"><a href="">Sign up</a></p>
+                    <p class="forgot"><a href="">Forget password?</a></p>
+                </article>
             </form>
         </div>
-    </div>
 </body>
 </html>
