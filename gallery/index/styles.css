@@ -27,37 +27,64 @@ h1 {
     font-size: 3em;
 }
 
+.links {
+    margin-top: 10px;
+}
+
 .links p{
     display: inline-block;
     font-size: 80%;
 }
 
 .sign-up {
-    width: 25%;
+    width: 40%;
     text-align: left;
-    margin-left: 10px;
+}
+
+.sign-up a {
+    padding-left: 10px;
 }
 
 .forgot {
-    width:55%;
+    width: 60%;
     text-align: right;
-    margin-left: 17px;
+}
+
+.forgot a {
+    padding-right: 10px;
+}
+
+a {
+    text-decoration-line: none;
+    color: #93A8AC;
+}
+
+a:visited {
+    color: #93A8AC;
+}
+
+a:hover {
+    color: #D7CEB2;
+}
+
+a:active {
+    color: #D7CEB2;
 }
 
 /* Custom fonts */
 
 @font-face {
     font-family: 'netflix_sansregular';
-    src: url('netflixfont/netflixsans-regular-webfont.woff2') format('woff2'),
-         url('netflixfont/netflixsans-regular-webfont.woff') format('woff');
+    src: url('../netflixfont/netflixsans-regular-webfont.woff2') format('woff2'),
+         url('../netflixfont/netflixsans-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'netflix_sansmedium';
-    src: url('netflixfont/netflixsans-medium-webfont.woff2') format('woff2'),
-         url('netflixfont/netflixsans-medium-webfont.woff') format('woff');
+    src: url('../netflixfont/netflixsans-medium-webfont.woff2') format('woff2'),
+         url('../netflixfont/netflixsans-medium-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
