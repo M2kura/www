@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css" />
-    <title>la galerie</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css" />
+        <title>la galerie</title>
+    </head>
+    <body>
         <div class="welcome">
             <h1>Welcome</h1>
         </div>
@@ -18,9 +18,35 @@
                     <label for="password">Password: <input type="password" id="password" name="password" required /></label>
                 </fieldset>
                 <article class="links">
-                    <p class="sign-up"><a href="">Sign up</a></p><p class="forgot"><a href="">Forget password?</a></p>
+                    <p class="sign-up"><a href="register.html">Sign up</a></p><p class="forgot"><a href="">Forget password?</a></p>
                 </article>
             </form>
         </div>
-</body>
+    </body>
 </html>
+
+<script>
+    const welcome = document.querySelector('h1');
+    const form = document.querySelector('.sign-in-form');
+    welcome.style.opacity = 0;
+    form.style.opacity = 0;
+
+    const fadeIn = (element, delay) => {
+        let opacity = 0;
+        const timer = setInterval(() => {
+            if (opacity >= 1) {
+                clearInterval(timer);
+            } else {
+                element.style.opacity = opacity;
+                opacity += 0.04;
+            }
+        }, 50);
+        if (element === welcome) {
+            setTimeout(() => {
+                fadeIn(form, 0);
+            }, delay);
+        }
+    }
+
+    fadeIn(welcome, 2500);
+</script>
