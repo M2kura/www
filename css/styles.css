@@ -3,6 +3,68 @@ body {
     font-family: netflix_sansregular;
 }
 
+/* Navbar */
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start; /* Change to left alignment */
+}
+
+nav ul li {
+    font-family: 'netflix_sansmedium', sans-serif;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #4c5760;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ff0000;
+}
+
+nav .logo {
+    font-family: 'netflix_sansregular', sans-serif;
+    font-size: 24px;
+    color: #4c5760;
+}
+
+nav {
+    background-color: #ffffff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    font-family: 'netflix_sansmedium', sans-serif;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #4c5760;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ff0000;
+}
+
+nav .logo {
+    font-family: 'netflix_sansregular', sans-serif;
+    font-size: 24px;
+    color: #4c5760;
+}
+
 /* Custom fonts */
 
 @font-face {

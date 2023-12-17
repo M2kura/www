@@ -7,9 +7,9 @@
 	<link href="../css/profile.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<nav>
-		<!-- Navigation bar can go here -->
-	</nav>
+	
+	<?php require('partials/nav.php'); ?>
+
 	<main>
 		<h2>Profile Page</h2>
 		<div class="profile-info">
