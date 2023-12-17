@@ -1,5 +1,4 @@
 <?php
-// FILEPATH: /home/teterheo/www/ZWA/gallery/index/register.php
 
 // Connect to the MySQL database
 $servername = "localhost";
@@ -13,6 +12,8 @@ if ($conn->connect_error) {
 }
 
 // Process the registration form submission
+$message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -24,12 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert the user data into the database
     $sql = "INSERT INTO accounts (username, password, email) VALUES ('$username', '$hashedPassword', '$email')";
     if ($conn->query($sql) === TRUE) {
-        echo "Registration successful!";
+        $message = "Registration successful!";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $message =  "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 
 // Close the database connection
 $conn->close();
-?>
+
+require "../views/register.view.php";

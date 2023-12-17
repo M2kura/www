@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="../css/styles.css" />
         <title>la galerie | Sign Up</title>
     </head>
     <body>
@@ -19,6 +19,12 @@
                     <label for="email">Email: <input type="email" id="email" name="email" required /></label>
                 </fieldset>
             </form>
+        </div>
+        <div>
+            <p>Already have an account? <a href="index.php">Sign In</a></p>
+            <?php if (!empty($message)) : ?>
+                <p><?= $message ?></p>
+            <?php endif; ?>
         </div>
     </body>
 </html>
