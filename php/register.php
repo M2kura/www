@@ -49,7 +49,7 @@ if(isset($_POST['reg_user'])) {
     //if no errors, insert data into database and upload the profile pic using $fileDestination. Make sure there can't be any SQL injection
     if(count($errors) == 0) {
         // Set default profile picture
-        $fileDestination = "../uploads/default/defaultProfilePic.jpeg";
+        $fileDestination = "../uploads/default/defaultProfilePic.png";
         //check if profile picture was uploaded, if yes, validate it
         if(isset($_FILES['profilePicture'])) {
             $file = $_FILES['profilePicture'];
@@ -101,7 +101,7 @@ if(isset($_POST['reg_user'])) {
         $message = "Success! Redirecting to login page...";
 
         //redirect to the login page with countdown timer and success message
-        header("refresh:3;url=../index.html");
+        header("refresh:3;url=../index.php");
         echo "<p class='success'>$message</p>";
         exit();
     }

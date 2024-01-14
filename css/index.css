@@ -21,6 +21,11 @@ h1 {
     font-size: 3em;
 }
 
+.error {
+    color: white;
+    text-align: center;
+}
+
 .links {
     margin-top: 10px;
 }

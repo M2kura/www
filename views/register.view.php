@@ -24,7 +24,7 @@
             </form>
         </div>
         <div class="prompts">
-            <p>Already have an account? <a href="../index.html">Sign In</a></p>
+            <p>Already have an account? <a href="../index.php">Sign In</a></p>
             <?php
             if (count($errors) > 0) {
                 foreach ($errors as $error) {

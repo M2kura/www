@@ -25,6 +25,6 @@
         </div> -->
         <h1>We are really sorry, but this feature is not available yet.</h1>
         <p class="sorry">Please, contact us manualy <a href="mailto:teterheo@fel.cvut.cz">here</a></p>
-        <p class="sorry"> Go gack to <a href="../index.html">log-in</a> page</p>
+        <p class="sorry"> Go gack to <a href="../index.php">log-in</a> page</p>
     </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 //connect to database
-require "db_connection.php";
+require "php/db_connection.php";
 
 //if already logged in, redirect to home.php
 if(isset($_SESSION['loggedin'])) {
@@ -45,4 +45,4 @@ if(isset($_POST['username'])) {
     }
 }
 
-require "../index.php";
+require "views/index.view.php";
