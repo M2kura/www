@@ -1,0 +1,61 @@
+.title {
+    color: white;
+    width: 220px;
+    margin: 300px auto -20px;
+    margin-top: 0; /* for the dev tool below */
+}
+
+.title h1 {
+    display: inline-grid;
+    width: 100%;
+}
+
+.title h1 span {
+    margin: -5px 0;
+}
+
+.reset-password-form{
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+legend {
+    text-align: left;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+
+.sorry {
+    text-align: center;
+}
+
+.links {
+    margin-top: 20px;
+}
+
+.links p{
+    font-size: 80%;
+    text-align: center;
+}
+
+a {
+    text-decoration-line: none;
+    color: #93A8AC;
+}
+
+a:visited {
+    color: #93A8AC;
+}
+
+a:hover {
+    color: #D7CEB2;
+}
+
+a:active {
+    color: #D7CEB2;
+}

@@ -1,27 +1,20 @@
 <?php
-
-// We need to use sessions, so you should always start sessions using the below code.
+// This page must contain user profile picture and name. Below this there's a space with the form that have a user friendly interface where user can upload couple of photos and arange them around this space. Later, at the home page of the website there will be a lost of all pages like that and other user will be able to go checl other people pages.
 session_start();
+
 // If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: html/index.html');
-	exit;
+require "non_login_redirect.php";
+
+// Connect to the db with db_connection.php
+require "db_connection.php";
+
+// Get the user data from the database
+$sql = "SELECT * FROM accounts WHERE id = " . $_SESSION["id"];
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+	$userData = $result->fetch_assoc();
+} else {
+	$message = "Error: " . $sql . "<br>" . $conn->error;
 }
-$DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'teterheo';
-$DATABASE_PASS = 'webove aplikace';
-$DATABASE_NAME = 'teterheo';
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if (mysqli_connect_errno()) {
-	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-}
-// We don't have the password or email info stored in sessions, so instead, we can get the results from the database.
-$stmt = $con->prepare('SELECT password, email FROM accounts WHERE id = ?');
-// In this case we can use the account ID to get the account info.
-$stmt->bind_param('i', $_SESSION['id']);
-$stmt->execute();
-$stmt->bind_result($password, $email);
-$stmt->fetch();
-$stmt->close();
 
 require "../views/profile.view.php";

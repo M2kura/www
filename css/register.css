@@ -1,8 +1,11 @@
 .submit {
     color: #C7D3DE;
 }
+.error {
+    color: red;
+}
 
-.success {
+.prompts p {
     text-align: center;
 }
 
@@ -41,7 +44,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 35px;
+    margin: 0px 0px 35px;
 }
 
 .register h1 {
@@ -78,4 +81,9 @@
 
 .main-fieldset {
     background-color: #4c5760;
+}
+
+.submit:hover {
+    background-color: #4c5760;
+    color: #DEEEEB;
 }

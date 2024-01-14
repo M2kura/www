@@ -7,20 +7,22 @@
 	<link href="../css/profile.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	
+ <!-- This page must contain user profile picture and name. Below this there's a space with the form that have a user friendly interface where user can upload couple of photos and arange them around this space. Later, at the home page of the website there will be a lost of all pages like that and other user will be able to go checl other people pages. -->
 	<?php require('partials/nav.php'); ?>
-
-	<main>
-		<h2>Profile Page</h2>
-		<div class="profile-info">
-			<img src="profile-picture.jpg" alt="Profile Picture" width="150" height="150">
-			<p>Email: <?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?></p>
-			<p>Password: <?= htmlspecialchars($password, ENT_QUOTES, 'UTF-8') ?></p>
-			<button onclick="window.location.href = '../php/edit_profile.php';">Edit Profile</button>
+	<div class="container">
+		<h1>Profile Page</h1>
+		<div class="profile">
+			<div class="profile-picture">
+				<!-- here we take the path for the image from db field profile_pic -->
+				<img src="<?php echo $userData['profile_pic']; ?>" alt="Profile Picture">
+			</div>
 		</div>
-	</main>
-	<footer>
-		<!-- Footer can go here -->
-	</footer>
+		<div class="profile-form">
+			<form action="php/upload.php" method="post" enctype="multipart/form-data">
+				<h2>Upload Images</h2>
+				<input type="file" name="fileToUpload" id="fileToUpload">
+				<input type="submit" value="Upload Image" name="submit">
+			</form>
+		</div>
 </body>
 </html>
