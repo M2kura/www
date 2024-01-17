@@ -13,6 +13,9 @@
 			<h1>Profile Page</h1>
 			<?php if (empty($errors)): ?>
 				<div class="profile">
+					<div class="profile-registration-date">
+						<h2>Registered on: <?php echo date('F j, Y', strtotime($userData['register_date'])); ?></h2>
+					</div>
 					<div class="profile-picture">
 						<img height="150px" width="150px" src="<?php echo $userData['profile_pic']; ?>" alt="Profile Picture">
 					</div>

@@ -5,13 +5,12 @@ session_start();
 require "non_login_redirect.php";
 require "db_connection.php";
 
-// Get the username from the URL parameter
-$username = $_GET['username'];
+$userId = $_GET['id'];
 $errors = array();
 
-$sql = "SELECT * FROM accounts WHERE username = ?";
+$sql = "SELECT * FROM accounts WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
+$stmt->bind_param('i', $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -21,6 +20,6 @@ if ($result->num_rows > 0) {
     array_push($errors, "User does not exist");
 }
 
-$isOwner = $username == $_SESSION['username'];
+$isOwner = $userId == $_SESSION['id'];
 
 require "../views/profile.view.php";

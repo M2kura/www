@@ -43,4 +43,5 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("si", $username, $_SESSION['id']);
 $stmt->execute();
 
-header("Location: profile.php");
+//head to the profile page with url id
+header("Location: profile.php?id=" . $_SESSION['id']);
