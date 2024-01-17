@@ -1,10 +1,24 @@
 <?php
 
 session_start();
-// If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: ../index.html');
-	exit;
+
+require "db_connection.php";
+
+require "non_login_redirect.php";
+
+//Fetch all users from the database
+function getAllUsers($conn) {
+    $sql = "SELECT username, profile_pic FROM accounts";
+    $result = mysqli_query($conn, $sql);
+
+    $users = [];
+    while($row = mysqli_fetch_assoc($result)) {
+        $users[] = $row;
+    }
+
+    return $users;
 }
+
+$users = getAllUsers($conn);
 
 require "../views/home.view.php";

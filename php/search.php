@@ -2,14 +2,12 @@
 require "db_connection.php";
 
 $search = $_GET['search'];
-
-$sql = "SELECT * FROM accounts WHERE username LIKE ?";
+$sql = "SELECT * FROM accounts WHERE username LIKE ? ORDER BY username ASC";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $searchParam);
-$searchParam = "%$search%";
+$searchWithWildcards = '%' . $search . '%';
+$stmt->bind_param('s', $searchWithWildcards);
 $stmt->execute();
 $result = $stmt->get_result();
+$users = $result->fetch_all(MYSQLI_ASSOC);
 
-while ($row = $result->fetch_assoc()) {
-    echo '<a href="profile.php?id=' . $row['id'] . '">' . $row['username'] . '</a><br>';
-}
+echo json_encode($users);

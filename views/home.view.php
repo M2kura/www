@@ -5,7 +5,6 @@
 		<title>Home Page</title>
 		<link href="../css/styles.css" rel="stylesheet" type="text/css">
         <link href="../css/home.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 	</head>
 	<body class="loggedin">
 
@@ -16,10 +15,16 @@
 			<p>Welcome back, <?=$_SESSION['username']?>!</p>
 		</div>
 		<div class="search">
-			<form action="php/search.php" method="get">
-				<input type="text" name="search" placeholder="Search for users">
+			<form id="searchForm">
+				<input type="text" name="search" id="searchInput" placeholder="Search for users">
 				<input type="submit" value="Search">
 			</form>
 		</div>
+		<div class="users">
+
+		</div>
+		<button id="loadMore">Load More Users</button>
+		<script src="../js/loadUsers.js"></script>
+		<script src="../js/searchUsers.js"></script>
 	</body>
 </html>
