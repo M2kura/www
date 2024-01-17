@@ -9,7 +9,6 @@
     <?php
     require('partials/nav.php');
     ?>
-    <main>
         <h2>Edit Profile</h2>
         <form action="updateProfile.php" method="post" enctype="multipart/form-data">
             <label for="username">Username:</label>
@@ -17,9 +16,13 @@
             <br>
             <input type="submit" value="Update Profile">
         </form>
-    </main>
-    <footer>
-        <!-- Footer can go here -->
-    </footer>
+        <?php
+        if (isset($_SESSION['errors'])) {
+            foreach ($_SESSION['errors'] as $error) {
+                echo "<p class='error'>$error</p>";
+            }
+            unset($_SESSION['errors']);
+        }
+        ?>
 </body>
 </html>
