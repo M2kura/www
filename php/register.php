@@ -1,8 +1,7 @@
 <?php
-
 require "db_connection.php";
-
-$errors = array();
+require "validateRegistrationData.php";
+require "uploadProfilePicture.php";
 
 if(isset($_POST['reg_user'])) {
     $username = $_POST['username'];
@@ -10,63 +9,35 @@ if(isset($_POST['reg_user'])) {
     $password = $_POST['password'];
     $cpassword = $_POST['cpassword'];
 
-    //password hashing
-    $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+    $errors = validateRegistrationData($conn, $username, $email, $password, $cpassword);
 
-    //validate if all fields are filled
-    if(empty($username) OR empty($email) OR empty($password) OR empty($cpassword)) {
-        array_push($errors, "All fields are required.");
-    }
-
-    //validate if username exists and have only lowercase letters, numbers and allowed symbols (. _ -)
-    $sql = "SELECT * FROM accounts WHERE username='$username'";
-    $result = $conn->query($sql);
-    if($result->num_rows > 0) {
-        array_push($errors, "Username already exists.");
-    }
-    if(!preg_match("/^[a-z0-9_-]{3,15}$/", $username)) {
-        array_push($errors, "Username must have only lowercase letters, numbers and allowed symbols (.; _; -;).");
-    }
-
-    //validate email
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        array_push($errors, "Email is invalid.");
-    }
-
-    //validate password length (min 8 characters)
-    if(strlen($password) < 8) {
-        array_push($errors, "Password must be at least 8 characters long.");
-    }
-
-    //validate if email already exists
-    $sql = "SELECT * FROM accounts WHERE email='$email'";
-    $result = $conn->query($sql);
-    if($result->num_rows > 0) {
-        array_push($errors, "Email already exists.");
-    }
-    
-
-    //if no errors, insert data into database and upload the profile pic using $fileDestination. Make sure there can't be any SQL injection
     if(count($errors) == 0) {
-        // Set default profile picture
         $fileDestination = "../uploads/default/defaultProfilePic.png";
-        //check if profile picture was uploaded, if yes, validate it
-        require "uploadProfilePicture.php";
+        if(isset($_FILES['profile_pic'])) {
+            $uploadResult = uploadProfilePicture($_FILES['profile_pic'], $username);
+            if(strpos($uploadResult, ', ') === false) { // No errors occurred during file upload
+                $fileDestination = $uploadResult;
+            } else {
+                // Handle file upload errors
+                $errors = explode(', ', $uploadResult);
+                // Display errors to the user
+            }
+        }
 
-        //insert data into database, protect from SQL injection
-        $stmt = $conn->prepare("INSERT INTO accounts (username, password, email, profile_pic) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $username, $hashPassword, $email, $fileDestination);
-        $stmt->execute();
-        $stmt->close();
-        $conn->close();
-        //set success message
-        $message = "Success! Redirecting to login page...";
-
-        //redirect to the login page with countdown timer and success message
-        header("refresh:3;url=../index.php");
-        echo "<p class='success'>$message</p>";
-        exit();
+        if(count($errors) == 0) {
+            $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("INSERT INTO accounts (username, password, email, profile_pic) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $username, $hashPassword, $email, $fileDestination);
+            $stmt->execute();
+            $stmt->close();
+            $conn->close();
+            $message = "Success! Redirecting to login page...";
+            header("refresh:3;url=../index.php");
+            echo "<p class='success'>$message</p>";
+            exit();
+        }
     }
 }
 
+$errors = isset($errors) ? $errors : [];
 require "../views/register.view.php";

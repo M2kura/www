@@ -1,47 +1,60 @@
 <?php
-//connect to database
 require "db_connection.php";
 
-//if already logged in, redirect to home.php
-if(isset($_SESSION['loggedin'])) {
-    header('Location: php/home.php');
-}
-$errors = array();
-//check if the form was sunmitted
-if(isset($_POST['username'])) {
-    //get data from form
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    //validate if all fields are filled
+/**
+ * Authenticate a user.
+ *
+ * This function checks if the username exists in the database and if the password is correct.
+ * If the username does not exist or the password is incorrect, it adds an error message to the errors array.
+ * If the username exists and the password is correct, it starts a session and sets the 'loggedin' session variable to TRUE.
+ *
+ * @param string $username The username of the user.
+ * @param string $password The password of the user.
+ * @return array Returns an array containing any error messages. If the array is empty, the user was authenticated successfully.
+ */
+function authenticateUser($username, $password) {
+    global $conn;
+    $errors = array();
+
+    // Validate if all fields are filled
     if(empty($username) OR empty($password)) {
         array_push($errors, "All fields are required.");
     }
-    //validate if username exists
-    $sql = "SELECT * FROM accounts WHERE username='$username'";
-    $result = $conn->query($sql);
+
+    // Validate if username exists
+    $sql = "SELECT * FROM accounts WHERE username=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
     if($result->num_rows == 0) {
         array_push($errors, "Username does not exist.");
     }
-    //validate password length (min 8 characters)
+
+    // Validate password length (min 8 characters)
     if(strlen($password) < 8) {
         array_push($errors, "Password must be at least 8 characters long.");
     }
-    //if no errors, check if password is correct
+
+    // If no errors, check if password is correct
     if(count($errors) == 0) {
-        $sql = "SELECT * FROM accounts WHERE username='$username'";
-        $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         if(password_verify($password, $row['password'])) {
-            //if password is correct, start session and redirect to home.php
+            // If password is correct, start session and redirect to home.php
             session_start();
             $_SESSION['loggedin'] = TRUE;
-            $_SESSION['username'] = $username;
-            $_SESSION['id'] = $row['id'];
-            header('Location: php/home.php');
-            exit();
         } else {
-            array_push($errors, "Password is incorrect.");
+            array_push($errors, "Incorrect password.");
         }
+    }
+
+    return $errors;
+}
+
+if(isset($_POST['username'])) {
+    $errors = authenticateUser($_POST['username'], $_POST['password']);
+    if(empty($errors)) {
+        header('Location: php/home.php');
     }
 }
 
