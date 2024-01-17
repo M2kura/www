@@ -15,5 +15,11 @@
 			<h2>Home Page</h2>
 			<p>Welcome back, <?=$_SESSION['username']?>!</p>
 		</div>
+		<div class="search">
+			<form action="php/search.php" method="get">
+				<input type="text" name="search" placeholder="Search for users">
+				<input type="submit" value="Search">
+			</form>
+		</div>
 	</body>
 </html>

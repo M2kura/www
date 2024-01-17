@@ -1,0 +1,65 @@
+.pic-change fieldset {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.pic-change fieldset legend {
+    font-weight: bold;
+    color: #b4b4b4;
+}
+
+.pic-change input[type="file"] {
+    display: block;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.pic-change input[type="submit"] {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.pic-change label {
+    padding: 10px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.pic-change label:hover {
+    background-color: #45a049; /* Darker green */
+} 
+
+fieldset {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    width: 300px; /* Adjust this to suit your needs */
+}
+
+#uploadButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: none; /* Hide the button initially */
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#uploadButton.show {
+    display: inline-block; /* Show the button when the 'show' class is added */
+}

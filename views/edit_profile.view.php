@@ -6,16 +6,15 @@
     <link href="../css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <nav>
-        <!-- Navigation bar can go here -->
-    </nav>
+    <?php
+    require('partials/nav.php');
+    ?>
     <main>
         <h2>Edit Profile</h2>
-        <form action="" method="post">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
+        <form action="updateProfile.php" method="post" enctype="multipart/form-data">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="<?php echo $userData['username']; ?>">
+            <br>
             <input type="submit" value="Update Profile">
         </form>
     </main>

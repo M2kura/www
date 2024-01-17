@@ -51,45 +51,7 @@ if(isset($_POST['reg_user'])) {
         // Set default profile picture
         $fileDestination = "../uploads/default/defaultProfilePic.png";
         //check if profile picture was uploaded, if yes, validate it
-        if(isset($_FILES['profilePicture'])) {
-            $file = $_FILES['profilePicture'];
-            $fileName = $_FILES['profilePicture']['name'];
-            $fileTmpName = $_FILES['profilePicture']['tmp_name'];
-            $fileSize = $_FILES['profilePicture']['size'];
-            $fileError = $_FILES['profilePicture']['error'];
-            $fileType = $_FILES['profilePicture']['type'];
-
-            $fileExt = explode('.', $fileName);
-            $fileActualExt = strtolower(end($fileExt));
-
-            $allowed = array('jpg', 'jpeg', 'png');
-
-            //validate if file is allowed
-            if(in_array($fileActualExt, $allowed)) {
-                //validate if there was no error while uploading
-                if($fileError === 0) {
-                    //validate if file size is not too big
-                    if($fileSize < 2500000) {
-                        //create file name profilePicture.extension
-                        $fileNameNew = "profilePicture.".$fileActualExt;
-                        //create file destination folder if it doesn't exist
-                        if(!file_exists("../uploads/".$username)) {
-                            mkdir("../uploads/".$username, 0777, true);
-                        }
-                        //set file destination (../uploads/{username}/profilePicture.extension)
-                        $fileDestination = "../uploads/".$username."/".$fileNameNew;
-                        //upload file to the destination
-                        move_uploaded_file($fileTmpName, $fileDestination);
-                    } else {
-                        array_push($errors, "Your file is too big. It must be less than 2.5MB.");
-                    }
-                } else {
-                    array_push($errors, "There was an error uploading your file.");
-                }
-            } else {
-                array_push($errors, "You cannot upload files of this type.");
-            }
-        } 
+        require "uploadProfilePicture.php";
 
         //insert data into database, protect from SQL injection
         $stmt = $conn->prepare("INSERT INTO accounts (username, password, email, profile_pic) VALUES (?, ?, ?, ?)");
